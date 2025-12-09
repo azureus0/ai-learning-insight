@@ -56,5 +56,10 @@ def predict_endpoint(data: InputData):
 # Blok ini biar bisa dijalankan lokal pakai 'python main.py'
 if __name__ == "__main__":
     import uvicorn
-    # Host 0.0.0.0 biar bisa diakses dari luar container (penting buat deployment)
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    import os
+    
+    # Ambil PORT dari Railway, kalau gak ada pake 8000 (buat lokal)
+    port = int(os.getenv("PORT", 8000)) 
+    
+    # Host wajib 0.0.0.0
+    uvicorn.run(app, host="0.0.0.0", port=port)
