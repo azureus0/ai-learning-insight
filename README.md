@@ -116,20 +116,18 @@ Backend melakukan query data user terkait (raw data) dari database, lalu mengiri
 ```json
 {
   "user_id": 101,
-  "category": "Fast Learner",
-  "insight_message": "Wow, ngebut banget! 12 materi selesai minggu ini. Coba pelan sedikit biar nilai kuisnya makin maksimal ya.",
+  "category": "Consistent Learner",
+  "insight_message": "Kerja bagus! Kamu rutin menyelesaikan materi secara berkala. Terus jaga ritme belajar ini ya.",
   "metrics": {
-    "avg_weighted_exam_score": 85.0,
+    "avg_weighted_exam_score": 85,
     "exam_duration_utilization_ratio": 0.75,
-    "avg_submission_revision_count": 0.0,
-    "avg_submission_revision_duration": 0.0,
-    "avg_submission_rating": 5.0,
-    "active_days": 5,
-    "completion_density": 4.5,
-    "consistency_score": 0.85,
-    "tutorial_revisit_rate": 0.1,
-    "avg_tutorial_duration": 45,
-    "absorption_ratio": 0.6
+    "avg_submission_revision_count": 0,
+    "avg_submission_revision_duration": 0,
+    "avg_submission_rating": 5,
+    "completion_density": 1,
+    "consistency_score": 1,
+    "tutorial_revisit_rate": 0,
+    "avg_tutorial_duration": 0
   }
 }
 ```
