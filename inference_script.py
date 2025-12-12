@@ -13,7 +13,7 @@ try:
     scaler = joblib.load(os.path.join(MODEL_DIR, 'scaler.pkl'))
     features_list = joblib.load(os.path.join(MODEL_DIR, 'feature_list.pkl'))
 except Exception as e:
-    print(f"⚠️ Error loading models: {e}")
+    print(f"Error loading models: {e}")
     model, scaler, features_list = None, None, []
 
 # --- 2. SETUP GEMINI API ---
@@ -23,10 +23,10 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
     # Pake model flash biar cepet & murah
-    gemini_model = genai.GenerativeModel('gemini-1.5-flash')
+    gemini_model = genai.GenerativeModel('gemini-pro')
 else:
     gemini_model = None
-    print("⚠️ Warning: GEMINI_API_KEY tidak ditemukan. Mode Fallback aktif.")
+    print("Warning: GEMINI_API_KEY tidak ditemukan. Mode Fallback aktif.")
 
 # --- 3. FUNGSI "BAN SEREP" (Rule Based) ---
 # Dipanggil kalau Gemini error atau API Key gak ada
