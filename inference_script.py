@@ -23,7 +23,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
     # Pake model flash biar cepet & murah
-    gemini_model = genai.GenerativeModel('gemini-pro')
+    gemini_model = genai.GenerativeModel('gemini-2.5-flash')
 else:
     gemini_model = None
     print("Warning: GEMINI_API_KEY tidak ditemukan. Mode Fallback aktif.")
