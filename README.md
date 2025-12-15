@@ -4,9 +4,9 @@ Dokumentasi penggunaan API untuk integrasi Machine Learning Learning Insight.
 
 ## 1. Integrasi API (Untuk Backend)
 
-API ini digunakan untuk memprediksi kategori belajar user dan memberikan insight personal berdasarkan data aktivitas mentah (Raw Data) dari database.
+API ini digunakan untuk memprediksi kategori belajar user dan memberikan *insight* personal berdasarkan data aktivitas mentah (Raw Data) dari database.
 
-* **Base URL:** `https://ai-learning-insight-ai-learning-insight.up.railway.app`
+* **Base URL (Live Deployment):** `https://ai-learning-insight-ai-learning-insight.up.railway.app`
 * **Documentation & Test:** `/docs` (Swagger UI)
 
 ### Endpoint Prediksi
@@ -17,11 +17,11 @@ API ini digunakan untuk memprediksi kategori belajar user dan memberikan insight
 
 #### Cara Penggunaan
 
-Backend melakukan query data user terkait dari database, lalu mengirimkannya sebagai JSON body ke endpoint ini.
+Backend mengambil data user terkait dari database, lalu mengirimkannya sebagai JSON *body* ke endpoint ini.
 
-⚠️ **PENTING:** Nama key dalam JSON harus **SAMA PERSIS** dengan nama tabel di database.
-* ✅ Gunakan: `developer_journey_trackings`
-* ❌ Jangan gunakan: `trackings`
+⚠️ **PENTING:** Nama *key* dalam JSON harus **SAMA PERSIS** dengan nama tabel di database karena digunakan untuk *mapping* internal di *Feature Engineering*.
+* ✅ Gunakan: `developer_journey_trackings`, `exam_results`, dll.
+* ❌ Jangan gunakan: `trackings`, `results`, dll.
 
 ---
 
@@ -97,5 +97,47 @@ Berikut adalah contoh data user yang menyelesaikan **30 tutorial** dalam waktu s
 }
 ```
 
-```
-```
+-----
+
+## 2\. Dokumentasi Model dan Kode Sumber
+
+### Link Model & Notebook Pelatihan
+
+Tautan ke *notebook* tempat model dilatih dan dievaluasi:
+
+  * **Link Drive Folder:** [https://drive.google.com/drive/folders/1TxQA7qy4bszwaJTCX8RWWlQeB0WnNmAq?usp=sharing](https://drive.google.com/drive/folders/1TxQA7qy4bszwaJTCX8RWWlQeB0WnNmAq?usp=sharing)
+  * **Link GitHub Gist:** [https://gist.github.com/azureus0/d5ba438ed8749581676c4bb5950481fd](https://gist.github.com/azureus0/d5ba438ed8749581676c4bb5950481fd)
+
+### Penjelasan File Code
+
+| Berkas | Deskripsi |
+| :--- | :--- |
+| `main.py` | File utama yang menjalankan server **FastAPI**. Bertanggung jawab menerima *request* POST ke `/predict` dan memvalidasi skema *input* sesuai nama tabel DB. |
+| `inference_script.py` | **Core Logic Prediksi.** File ini memuat semua model `.pkl`, menjalankan prediksi *clustering*, melakukan *check* data kosong (`Sleeping Student`), dan memanggil fungsi Generative AI untuk membuat pesan motivasi. |
+| `ml_utils.py` | **Feature Engineering.** File ini berisi fungsi untuk mengolah *raw data* dari Backend (multi-tabel) menjadi 5 *fitur utama* yang siap diprediksi. Logika *mapping* nama tabel database ke nama variabel Python juga ada di sini. |
+| `requirements.txt` | Daftar *dependencies* Python yang dibutuhkan (FastAPI, scikit-learn, google-generativeai, pandas, dll.). |
+
+-----
+
+## 3\. Petunjuk Setup Lokal
+
+Untuk menjalankan ML API ini di *localhost*:
+
+1.  **Dependencies:**
+    Buka terminal di folder ini dan instal paket Python:
+    ```bash
+    pip install -r requirements.txt
+    ```
+2.  **Environment Template:**
+    Buat file **`.env`** (berdasarkan template `.env.example` yang disertakan) dan masukkan API Key Gemini Anda:
+    ```env
+    # Isi file .env Anda:
+    GEMINI_API_KEY=your_google_gemini_api_key_here
+    ```
+3.  **Cara Menjalankan:**
+    ```bash
+    python main.py
+    ```
+    *API akan berjalan di `http://localhost:8000`.*
+
+<!-- end list -->
