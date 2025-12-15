@@ -1,5 +1,9 @@
 # AI Learning Insight API
 
+Link Notebook: 
+Drive: https://drive.google.com/drive/folders/1TxQA7qy4bszwaJTCX8RWWlQeB0WnNmAq?usp=sharing
+GithubGist: https://gist.github.com/azureus0/d5ba438ed8749581676c4bb5950481fd
+
 Dokumentasi penggunaan API untuk integrasi Machine Learning Learning Insight.
 
 ## 1\. Integrasi API (Untuk Backend)
